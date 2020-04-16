@@ -1,0 +1,59 @@
+body {
+    text-align: center;
+}
+
+.library {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 180px) ) ;
+    gap: 15px;
+    justify-content: center;
+    margin: 30px auto;
+    max-width: 900px;
+}
+
+.card {
+    height: 230px;
+    background-color: rgb(56, 56, 56);
+    color: cornsilk;
+    border-radius: 5px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.title {
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+}
+
+.author {
+    font-size: 0.9rem;
+    margin-bottom: 12px;
+}
+
+.pages, .state {
+    font-weight: 300;
+    font-size: 0.7rem;
+}
+
+.card-container {
+    margin-top: auto;
+    display: flex;
+    align-items: flex-end;
+}
+
+.state {
+    text-align: left;
+    margin-right: auto;
+}
+
+i {
+    font-size: 1rem;
+    margin-left: 10px;
+}
+
+/* .checkmark {
+
+} */
+
