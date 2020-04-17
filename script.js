@@ -64,3 +64,5 @@ function render() {
 }
 
 render();
+
+const newBookButton = document.querySelector(".new-book");
