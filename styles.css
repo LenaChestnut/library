@@ -2,6 +2,10 @@ body {
     text-align: center;
 }
 
+.library-container {
+    padding: 25px;
+}
+
 .library {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(160px, 180px) ) ;
@@ -53,6 +57,16 @@ i {
     margin-left: 10px;
 }
 
+.form-page {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.hidden {
+    display: none;
+}
 
 form {
     position: fixed;
@@ -70,6 +84,7 @@ form {
     font-family: "Roboto", "Arial", sans-serif;
     color: cornsilk;
     border-radius: 5px;
+    z-index: 2;
 }
 
 input {
