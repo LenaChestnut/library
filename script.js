@@ -9,13 +9,15 @@ addBookToLibrary("Slaughterhouse-Five", "Kurt Vonnegut", 215, true);
 function Book(title, author, pages, read) {
     this.title = title;
     this.author = author;
-    this.pages = pages;
-    this.read = read;
+    this.pages = Number(pages);
+    if (read === "true") {
+        this.read = true;
+    } else {
+        this.read = false;
+    }
 }
 
-Book.prototype.info = function() {
-    return `${this.title} by ${this.author}, ${this.pages} pages, ${this.read}`;
-}
+render();
 
 function addBookToLibrary(title, author, pages, read) {
     let newBook = new Book(title, author, pages, read);
@@ -24,6 +26,7 @@ function addBookToLibrary(title, author, pages, read) {
 
 function render() {
     const shelf = document.querySelector(".library");
+    shelf.innerHTML = '';
     myLibrary.forEach((book) => {
         const bookCard = document.createElement("div");
         bookCard.classList.add("card");
@@ -48,7 +51,7 @@ function render() {
 
         const state = document.createElement("p");
         state.classList.add("state");
-        state.textContent = (book.read) ? "I've read it!" : "Not read";
+        state.textContent = (book.read === true) ? "I've read it!" : "Not read";
         cardContainer.appendChild(state);
         const checkmark = document.createElement("div");
         checkmark.innerHTML = '<i class="fas fa-check"></i>';
@@ -63,6 +66,58 @@ function render() {
     });
 }
 
-render();
-
 const newBookButton = document.querySelector(".new-book");
+const form = document.querySelector(".form-page");
+newBookButton.addEventListener("click", () => {
+    //show form
+    form.classList.remove("hidden");
+});
+
+const cancelButton = document.querySelector(".cancel");
+cancelButton.addEventListener("click", () => {
+    hideForm();
+    clearFields();
+})
+
+function clearFields() {
+    document.forms["BookForm"]["title"].value = "";
+    document.forms["BookForm"]["author"].value = "";
+    document.forms["BookForm"]["pages"].value = "";
+}
+
+const addButton = document.querySelector(".add");
+addButton.addEventListener("click", () => {
+    let bookTitle = document.forms["BookForm"]["title"];
+    let bookAuthor = document.forms["BookForm"]["author"];
+    let bookPages = document.forms["BookForm"]["pages"];
+    let bookRead = document.forms["BookForm"]["read"];
+    if (validateInput(bookTitle, bookAuthor, bookPages)) {
+        addBookToLibrary(bookTitle.value, bookAuthor.value, bookPages.value, bookRead.value);
+        render();
+        hideForm();
+        clearFields();
+    }
+});
+
+function hideForm() {
+    form.classList.add("hidden");
+}
+
+function validateInput(title, author, pages) {
+    if (title.value === "") {
+        title.focus();
+        alert("Please enter the title");
+        return false; 
+    }
+    if (author.value === "") {
+        author.focus();
+        alert("Please enter name of the author");
+        return false; 
+    }
+    if (pages.value === "" || !/\d/.test(pages.value) || pages.value < 1) {
+        pages.focus();
+        alert("Please enter the number of pages");
+        return false;
+    }
+    return true;
+}
