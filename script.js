@@ -10,7 +10,7 @@ function Book(title, author, pages, read) {
     this.title = title;
     this.author = author;
     this.pages = Number(pages);
-    if (read === "true") {
+    if (read === "true" || read === true) {
         this.read = true;
     } else {
         this.read = false;
@@ -56,14 +56,31 @@ function render() {
         const checkmark = document.createElement("div");
         checkmark.innerHTML = '<i class="fas fa-check"></i>';
         cardContainer.appendChild(checkmark);
-        const trashcan = document.createElement("div");
-        trashcan.innerHTML = '<i class="fas fa-trash"></i>';
-        cardContainer.appendChild(trashcan);
+
+        createDeleteButton(cardContainer, myLibrary.indexOf(book));
 
         bookCard.appendChild(cardContainer);
 
+        bookCard.setAttribute('id', myLibrary.indexOf(book));
+
         shelf.appendChild(bookCard);
     });
+}
+
+function createDeleteButton(card, cardIndex) {
+    const deleteButton = document.createElement("div");
+    deleteButton.setAttribute("data-index", cardIndex);
+    deleteButton.innerHTML = '<i class="fas fa-trash"></i>';
+    card.appendChild(deleteButton);
+    deleteButton.addEventListener("click", (e) => {
+        let id = e.target.parentNode.getAttribute('data-index');
+        deleteBook(id);
+    });
+}
+
+function deleteBook(index) {
+    myLibrary.splice(index, 1);
+    render();
 }
 
 const newBookButton = document.querySelector(".new-book");
