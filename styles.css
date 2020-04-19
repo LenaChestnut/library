@@ -1,9 +1,18 @@
+:root {
+    --main-light: #EFEFF0;
+    --main-dark: #221E22;
+    --btn-main: #374A67;
+    --btn-hover: #42597a;
+}
+
 body {
     text-align: center;
+    background-color: var(--main-light);
 }
 
 .library-container {
     padding: 25px;
+    color: var(--main-dark);
 }
 
 .library {
@@ -17,8 +26,8 @@ body {
 
 .card {
     height: 230px;
-    background-color: rgb(56, 56, 56);
-    color: cornsilk;
+    background-color: var(--main-dark);
+    color: var(--main-light);
     border-radius: 5px;
     padding: 20px;
     display: flex;
@@ -29,6 +38,7 @@ body {
     font-weight: 700;
     font-size: 1.1rem;
     margin-bottom: 10px;
+
 }
 
 .author {
@@ -61,7 +71,7 @@ i {
     position: fixed;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(0, 0, 0, 0.5);
 }
 
 .hidden {
@@ -75,14 +85,14 @@ form {
     align-items: start;
     width: 250px;
     padding: 25px;
-    background-color: darkcyan;
+    background-color: var(--main-dark);
     top: 50%;
     left: 50%;
     margin-top: -240px;
     margin-left: -125px;
     box-sizing: border-box;
     font-family: "Roboto", "Arial", sans-serif;
-    color: cornsilk;
+    color: var(--main-light);
     border-radius: 5px;
     z-index: 2;
 }
@@ -116,7 +126,7 @@ input[type=radio] {
 
 input[type=radio] + label::before {
     content: '';
-    background-color: rgb(255, 255, 255);
+    background-color: var(--main-light);
     display: inline-block;
     width: 0.9em;
     height: 0.9em;
@@ -134,14 +144,14 @@ input[type=radio] + label::before {
 }
 
 input[type=radio]:checked + label::before {
-    background-color: rgb(56, 56, 56);
+    background-color: var(--main-dark);
     box-shadow: inset 0 0 0 .2em rgb(255, 255, 255);
 }
 
 button {
     border: none;
-    background-color: rgb(56, 56, 56);
-    color: white;
+    background-color: var(--btn-main);
+    color: var(--main-light);
     padding: 10px 15px;
     margin-top: 20px;
     border-radius: 5px;
@@ -149,7 +159,19 @@ button {
 }
 
 button:hover {
-    background-color: rgb(88, 88, 88);
+    background-color: var(--btn-hover);
+}
+
+i {
+    color: rgba(239, 239, 240, 0.3);
+}
+
+i:hover {
+    color: rgba(239, 239, 240, 1);
+}
+
+.read i {
+    color: rgba(239, 239, 240, 1);
 }
 
 button, i {
