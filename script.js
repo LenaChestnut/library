@@ -32,9 +32,10 @@ function updateStorage() {
 function loadStorage() {
     if (localStorage.getItem("library")) {
         myLibrary = JSON.parse(localStorage.getItem("library"));
-        myLibrary.forEach((book) => {
-            book.prototype = Object.create(Book.prototype);
-        });
+
+        for (let i = 0; i < myLibrary.length; i++) {
+            myLibrary[i] = new Book(myLibrary[i].title, myLibrary[i].author, myLibrary[i].pages, myLibrary[i].read);
+        }
     } else {
         addBookToLibrary("The Fellowship of the Ring", "J.R.R. Tolkien", 423, true);
         addBookToLibrary("Flowers for Algernon", "Daniel Keyes", 311, true);
