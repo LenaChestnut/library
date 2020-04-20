@@ -1,10 +1,6 @@
 let myLibrary = [];
 
-addBookToLibrary("The Fellowship of the Ring", "J.R.R. Tolkien", 423, true);
-addBookToLibrary("Flowers for Algernon", "Daniel Keyes", 311, true);
-addBookToLibrary("Alice in Wonderland", "Lewis Carroll", 200, true);
-addBookToLibrary("1984", "George Orwell", 328, false);
-addBookToLibrary("Slaughterhouse-Five", "Kurt Vonnegut", 215, true);
+loadStorage();
 
 function Book(title, author, pages, read) {
     this.title = title;
@@ -26,6 +22,26 @@ render();
 function addBookToLibrary(title, author, pages, read) {
     let newBook = new Book(title, author, pages, read);
     myLibrary.push(newBook);
+    updateStorage();
+}
+
+function updateStorage() {
+    localStorage.setItem("library", JSON.stringify(myLibrary));
+}
+
+function loadStorage() {
+    if (localStorage.length !== 0) {
+        myLibrary = JSON.parse(localStorage.getItem("library"));
+        myLibrary.forEach((book) => {
+            book.prototype = Object.create(Book.prototype);
+        });
+    } else {
+        addBookToLibrary("The Fellowship of the Ring", "J.R.R. Tolkien", 423, true);
+        addBookToLibrary("Flowers for Algernon", "Daniel Keyes", 311, true);
+        addBookToLibrary("Alice in Wonderland", "Lewis Carroll", 200, true);
+        addBookToLibrary("1984", "George Orwell", 328, false);
+        addBookToLibrary("Slaughterhouse-Five", "Kurt Vonnegut", 215, true);
+    }
 }
 
 const newBookButton = document.querySelector(".new-book");
@@ -140,6 +156,7 @@ function createDeleteButton(card, cardIndex) {
 function deleteBook(index) {
     myLibrary.splice(index, 1);
     render();
+    updateStorage();
 }
 
 function createToggleButton(card, cardIndex, isRead) {
