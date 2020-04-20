@@ -176,5 +176,6 @@ function createToggleButton(card, cardIndex, isRead) {
         let id = e.target.parentNode.getAttribute('data-index');
         myLibrary[id].toggleRead();
         render();
+        updateStorage();
     });
 }
